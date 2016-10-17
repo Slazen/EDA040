@@ -1,0 +1,58 @@
+Which monitor attributes are accessed/modified by which threads?
+
+    Person Thread
+        int[] waitEntry
+        int[] waitExit
+        int load
+
+    Elevator Thread
+        int here
+        int next
+
+What conditions must be true for a person to be allowed to enter the lift?
+
+    The lift cannot be full
+    The lift must be positioned at the same floor
+    (Check if lift heading in right direction)
+
+What conditions must be true for a person to leave the lift?
+
+    The lift must be positioned at the correct floor
+
+What condition must be true for the lift to start moving to another floor?
+
+    The next floor cannot be the same as the current one
+    All passengers must have been notified of the current floor
+    The people that are waiting outside must be notified that the elevator has arrived
+
+Which monitor operations are suitable in order to guarantee proper synchronization of the various threads?
+What, and how much, must be performed as a part of each monitor operation?
+
+    arriveAtFloor(int floor)
+        When a person is created add him to a floor
+        Draw person at floor via LiftView
+
+    enterTowardsFloor(int floor)
+        When a person enters the elevator remove him from the waitEntry
+        Make person enter elevator in LiftView
+        add him to the waitExit and increment load by one.
+
+    exitAtFloor(int floor)
+        When arriving at floor remove from waitExit
+        Decrease load by one
+        Make person exit elevator in LiftView
+
+    isFull()
+        Check if load currently at max
+        Return boolean
+
+    moveElevator()
+        if moving up increase floor until top floor
+        if at top floor change direction and decrease floor
+        if moving down decrease floor until bottom floor
+        if at bottom floor change direction and increase floor
+
+
+
+
+
